@@ -1,0 +1,14 @@
+<div>
+    @if (!loading) {
+        <h1>{{pelicula?.nombre}}</h1>
+    <h2>Genero: {{pelicula?.genero}}</h2>
+    <h3>Precio: {{pelicula?.precio}}</h3>
+    
+    @if (pelicula?.descripcion){
+        <h4>Descripcion: {{pelicula?.descripcion}}</h4>
+    }}@else {
+        <p> <i>Cargando el detalle...</i> </p>
+    }
+    
+    <button type="button" class="btn btn-outline-secondary" routerLink="/peliculas">Volver</button>
+</div>

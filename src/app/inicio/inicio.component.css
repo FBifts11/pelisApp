@@ -1,0 +1,14 @@
+h1 {
+    display:block;
+    text-align: center;
+}
+h2 {
+    margin: 2rem;
+}
+
+ol {
+    margin: 1rem;
+}
+a:hover {
+    color: red;
+}

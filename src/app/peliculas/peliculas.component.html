@@ -1,0 +1,32 @@
+<div class="container">
+    <h1>Listado de Peliculas</h1>
+
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Genero</th>
+            <th scope="col">Precio</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+            @for (pelicula of listaPeliculas; track pelicula.id) { <!-- Iteramos sobre nuestra lista de peliculas
+                                                                    y mostramos las pripiedades -->
+                <tr>
+                    <th scope="row">{{pelicula.id}}</th>
+                    <td>{{pelicula.nombre}}</td>
+                    <td>{{pelicula.genero}}</td>
+                    <td>{{pelicula.precio}}</td>
+                    <button type="button" class="btn btn-outline-success" 
+                    [routerLink]="['/peliculas', pelicula.id]">Detalle</button> <!-- En el routerLink pasamos el parametro,
+                                                                                  en este caso pelicula.id -->
+    
+                  </tr>
+            }
+          
+          
+        </tbody>
+      </table>
+</div>
