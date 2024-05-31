@@ -1,1 +1,58 @@
-<p>contacto works!</p>
+<!-- <div class="container">
+    <form #miFormulario="ngForm" (ngSubmit)="enviar()">
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="nombre" [(ngModel)]="usuario.nombre"
+            [ngModelOptions]="{standalone: true}" required>
+          </div>
+
+
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" class="form-control" id="email" [(ngModel)]="usuario.email"
+          [ngModelOptions]="{standalone: true}" required>
+        </div>
+        
+        
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+</div> -->
+
+<div class="container">
+<form [formGroup] = "miFormulario" (ngSubmit)="enviar()">
+    <div class="mb-3">
+        <label for="nombre" class="form-label">Nombre</label>
+        <input [ngClass]="{'is-invalid': tieneErrores('nombre', 'required')}" type="text" class="form-control" id="nombre" formControlName="nombre">
+      </div>
+
+      @if (tieneErrores('nombre', 'required')) {
+        <div class="text-danger">Nombre requerido</div>
+      }
+      
+      <div class="mb-3">
+        <label for="apellido" class="form-label">Apellido</label>
+        <input type="text" class="form-control" id="apellido" formControlName="apellido">
+      </div>
+      
+      <label for="tipoDNI" class="form-label">Ingrese tipo de documento</label>
+      <select class="form-select" id="tipoDNI" formControlName="tipoDni">
+        <option value="DNI">DNI</option>
+        <option value="Pasaporte">Pasaporte</option>
+        <option value="Cedula">Cedula</option>
+      </select>
+      
+      <div class="mb-3">
+        <label for="DNI" class="form-label">{{usuarioActivo.tipoDni}}</label>
+        <input type="text" class="form-control" id="DNI" formControlName="dni">
+      </div>
+
+
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input type="email" class="form-control" id="email" formControlName="email">
+    </div>
+    
+    
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
