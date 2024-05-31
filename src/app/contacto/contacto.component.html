@@ -1,58 +1,98 @@
+<!-- Formulario basado en plantilla -->
+
 <!-- <div class="container">
-    <form #miFormulario="ngForm" (ngSubmit)="enviar()">
-        <div class="mb-3">
-            <label for="nombre" class="form-label">Nombre</label>
-            <input type="text" class="form-control" id="nombre" [(ngModel)]="usuario.nombre"
-            [ngModelOptions]="{standalone: true}" required>
-          </div>
 
-
+     <form #miFormulario="ngForm" (ngSubmit)="enviar()">
         <div class="mb-3">
-          <label for="email" class="form-label">Email</label>
-          <input type="email" class="form-control" id="email" [(ngModel)]="usuario.email"
-          [ngModelOptions]="{standalone: true}" required>
+            <label for="name" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="name" [(ngModel)]="usuario.nombre" 
+            [ngModelOptions]="{standalone:true}">
         </div>
-        
-        
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
+
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" [(ngModel)]="usuario.email" 
+            [ngModelOptions]="{standalone:true}">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Enviar</button>
+    </form>
 </div> -->
 
+
+
+
+<!-- ------------------------------------------------------------------------------------------------------------------------------- -->
+
+
+<!-- Formulario reactivo -->
+
+
+
+
+
 <div class="container">
-<form [formGroup] = "miFormulario" (ngSubmit)="enviar()">
-    <div class="mb-3">
-        <label for="nombre" class="form-label">Nombre</label>
-        <input [ngClass]="{'is-invalid': tieneErrores('nombre', 'required')}" type="text" class="form-control" id="nombre" formControlName="nombre">
-      </div>
-
+  <form [formGroup]="miFormulario" (ngSubmit)="enviar()">
+  <div class="mb-3">
+      <label for="name" class="form-label">Nombre</label>
+      <input [ngClass]="{'is-invalid': tieneErrores('nombre', 'required')|| tieneErrores('nombre', 'minlength') }"
+          type="text" class="form-control" id="name" formControlName="nombre">
       @if (tieneErrores('nombre', 'required')) {
-        <div class="text-danger">Nombre requerido</div>
+      <div class="text-danger">Nombre requerido</div>
       }
-      
-      <div class="mb-3">
-        <label for="apellido" class="form-label">Apellido</label>
-        <input type="text" class="form-control" id="apellido" formControlName="apellido">
-      </div>
-      
-      <label for="tipoDNI" class="form-label">Ingrese tipo de documento</label>
-      <select class="form-select" id="tipoDNI" formControlName="tipoDni">
-        <option value="DNI">DNI</option>
-        <option value="Pasaporte">Pasaporte</option>
-        <option value="Cedula">Cedula</option>
+      @if (tieneErrores('nombre', 'minlength')) {
+      <div class="text-danger">Minimo tres caracteres</div>
+      }
+  </div>
+
+  <div class="mb-3">
+      <label for="apellido" class="form-label">Apellido</label>
+      <input
+          [ngClass]="{'is-invalid': tieneErrores('apellido', 'required')|| tieneErrores('apellido', 'minlength') }"
+          type="text" class="form-control" id="apellido" formControlName="apellido">
+      @if (tieneErrores('apellido', 'required')) {
+      <div class="text-danger">Apellido requerido</div>
+      }
+      @if (tieneErrores('apellido', 'minlength')) {
+      <div class="text-danger">Minimo tres caracteres</div>
+      }
+  </div>
+
+  <div>
+      <label for="tipoDni" class="form-label">Seleccionar tipo de documento</label>
+      <select class="form-select" id="tipoDni" formControlName="tipoDni">
+          <option value="DNI">DNI</option>
+          <option value="Pasaporte">Pasporte</option>
+          <option value="Cedula">Cedula</option>
       </select>
-      
-      <div class="mb-3">
-        <label for="DNI" class="form-label">{{usuarioActivo.tipoDni}}</label>
-        <input type="text" class="form-control" id="DNI" formControlName="dni">
-      </div>
+  </div>
+  <div class="mb-3">
+      <label for="dni" class="form-label">{{ usuarioActivo.tipoDni }}</label>
+      <input [ngClass]="{'is-invalid': tieneErrores('dni', 'required')|| tieneErrores('dni', 'minlength') }"
+          type="text" class="form-control" id="name" formControlName="dni">
+      @if (tieneErrores('dni', 'required')) {
+      <div class="text-danger">Es necesario ingresar el numero de {{ usuarioActivo.tipoDni }}</div>
+      }
+      @if (tieneErrores('dni', 'minlength')) {
+      <div class="text-danger">{{ usuarioActivo.tipoDni }} requiere al menos siete caracteres</div>
+      }
+  </div>
 
 
-    <div class="mb-3">
+  <div class="mb-3">
       <label for="email" class="form-label">Email</label>
-      <input type="email" class="form-control" id="email" formControlName="email">
-    </div>
-    
-    
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
+      <input [ngClass]="{'is-invalid': tieneErrores('email', 'required') || tieneErrores('email', 'email')}"
+          type="email" class="form-control" id="email" formControlName="email">
+      @if (tieneErrores('email', 'required')) {
+      <div class="text-danger">Email requerido</div>
+      }
+
+      @if (tieneErrores('email', 'email')) {
+      <div class="text-danger">Formato invalido</div>
+      }
+
+  </div>
+
+  <button type="submit" class="btn btn-primary">Enviar</button>
+</form>
 </div>
